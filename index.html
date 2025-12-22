@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>AWE — Streetwear Caps</title>
+
+<style>
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+footer h4 {
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+footer p {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Inter, system-ui, Arial, sans-serif;
+  background: #000;
+  color: #fff;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 40px;
+  border-bottom: 1px solid #1f2937;
+  position: sticky;
+  top: 0;
+  background: rgba(0,0,0,.9);
+  backdrop-filter: blur(8px);
+  z-index: 5;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+nav span {
+  margin-left: 26px;
+  cursor: pointer;
+  opacity: .7;
+  transition: .3s;
+}
+nav span:hover { opacity: 1; }
+
+.hero {
+  padding: 140px 40px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 64px;
+  margin-bottom: 20px;
+  animation: fadeUp 1s ease;
+}
+
+.hero p {
+  color: #9ca3af;
+  font-size: 18px;
+  margin-bottom: 40px;
+  animation: fadeUp 1.2s ease;
+}
+
+.hero button {
+  padding: 16px 36px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 40px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: .3s;
+}
+.hero button:hover { transform: scale(1.05); }
+
+/* SECTION */
+.section {
+  padding: 80px 40px;
+}
+
+.section h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+}
+
+/* PRODUCTS */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: #020617;
+  border-radius: 26px;
+  padding: 22px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: .6s ease;
+}
+
+.card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0,0,0,.6);
+}
+
+/* FAKE IMAGE */
+.fake-image {
+  height: 220px;
+  border-radius: 20px;
+  background: linear-gradient(135deg,#111827,#020617);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.price {
+  color: #9ca3af;
+  margin: 10px 0;
+}
+
+.card button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 20px;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .3s;
+}
+.card button:hover { transform: scale(1.05); }
+
+/* REVIEWS */
+.reviews {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.review {
+  background: #020617;
+  border-radius: 20px;
+  padding: 22px;
+  font-size: 14px;
+  animation: fadeUp .8s ease;
+}
+
+.review b {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* CART */
+.cart {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 400px;
+  height: 100%;
+  background: #020617;
+  padding: 30px;
+  transition: .5s ease;
+  z-index: 10;
+}
+
+.cart.active { right: 0; }
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+
+.total {
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.cart button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+}
+
+
+.checkout {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout.active { display: flex; }
+
+.checkout-box {
+  background: #020617;
+  padding: 30px;
+  border-radius: 24px;
+  width: 360px;
+  animation: scaleIn .4s ease;
+}
+
+.checkout-box input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  border: none;
+  background: #111827;
+  color: #fff;
+}
+
+.checkout-box button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 20px;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+}
+
+footer {
+  padding: 60px 40px;
+  border-top: 1px solid #1f2937;
+  color: #9ca3af;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scaleIn {
+  from { transform: scale(.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">AWE</div>
+  <nav>
+    <span onclick="scrollToSection('home')">Главная</span>
+    <span onclick="scrollToSection('catalog')">Каталог</span>
+    <span onclick="toggleCart()">Корзина (<span id="count">0</span>)</span>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h1>BLACK STREET LUXE</h1>
+  <p>Премиальные кепки для городского стиля</p>
+  <button onclick="scrollToSection('catalog')">Перейти в каталог</button>
+</section>
+
+<section class="section" id="catalog">
+  <h2>Каталог</h2>
+  <div class="products" id="products"></div>
+</section>
+
+<section class="section">
+  <h2>Отзывы</h2>
+  <div class="reviews">
+    <div class="review"><b>Илья</b>Качество на уровне, сидит идеально.</div>
+    <div class="review"><b>Артём</b>Минимализм и стиль.</div>
+    <div class="review"><b>Даниил</b>Форма держится отлично.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>AWE</h4>
+      <p>Премиальный streetwear бренд кепок.</p>
+      <p>BLACK STREET LUXE</p>
+    </div>
+
+    <div>
+      <h4>Контакты</h4>
+      <p>📞 +7 (999) 123-45-67</p>
+      <p>✉️ support@awewear.ru</p>
+      <p>📍 Москва, Россия</p>
+    </div>
+
+    <div>
+      <h4>Соцсети</h4>
+      <p>Instagram</p>
+      <p>Telegram</p>
+      <p>VK</p>
+    </div>
+
+    <div>
+      <h4>Информация</h4>
+      <p>Доставка и оплата</p>
+      <p>Возврат товара</p>
+      <p>Политика конфиденциальности</p>
+    </div>
+  </div>
+
+  <div style="margin-top:40px;text-align:center;font-size:13px;opacity:.6">
+    © AWE, 2025 — Streetwear Caps
+  </div>
+</footer>
+
+
+<div class="cart" id="cart">
+  <h2>Корзина</h2>
+  <div id="cartItems"></div>
+  <div class="total">Итого: ₽<span id="total">0</span></div>
+  <button onclick="checkout.classList.add('active')">Оформить заказ</button>
+</div>
+
+<div class="checkout" id="checkout">
+  <div class="checkout-box">
+    <h3>Оформление заказа</h3>
+    <input placeholder="Имя">
+    <input placeholder="Телефон">
+    <input placeholder="Адрес">
+    <button onclick="finish()">Подтвердить</button>
+  </div>
+</div>
+
+<script>
+/* DOM */
+const productsDiv = document.getElementById("products");
+const cartDiv = document.getElementById("cart");
+const cartItems = document.getElementById("cartItems");
+const count = document.getElementById("count");
+const total = document.getElementById("total");
+const checkout = document.getElementById("checkout");
+
+/* DATA */
+const products = [
+  {name:"AWE Shadow Cap",price:3490},
+  {name:"AWE Night Core",price:3790},
+  {name:"AWE Urban Black",price:2990},
+  {name:"AWE Mono Lux",price:4290},
+  {name:"AWE Street Void",price:3290},
+  {name:"AWE Limited 01",price:4990}
+];
+
+let cart = [];
+
+/* RENDER PRODUCTS */
+products.forEach(p=>{
+  productsDiv.innerHTML += `
+    <div class="card">
+      <div class="fake-image">IMAGE</div>
+      <h3>${p.name}</h3>
+      <div class="price">₽${p.price}</div>
+      <button onclick="add('${p.name}',${p.price})">
+        Добавить в корзину
+      </button>
+    </div>
+  `;
+});
+
+/* ANIMATION ON SCROLL */
+const cards = document.querySelectorAll(".card");
+window.addEventListener("scroll",()=>{
+  cards.forEach(c=>{
+    if(c.getBoundingClientRect().top < window.innerHeight - 80)
+      c.classList.add("show");
+  });
+});
+
+/* CART LOGIC */
+function add(n,p){
+  cart.push({n,p});
+  update();
+}
+
+function update(){
+  cartItems.innerHTML="";
+  let s=0;
+  cart.forEach(i=>{
+    s+=i.p;
+    cartItems.innerHTML+=`
+      <div class="cart-item">
+        <span>${i.n}</span>
+        <span>₽${i.p}</span>
+      </div>`;
+  });
+  count.textContent=cart.length;
+  total.textContent=s;
+}
+
+function toggleCart(){
+  cartDiv.classList.toggle("active");
+}
+
+function finish(){
+  alert("Заказ оформлен!");
+  cart=[];
+  update();
+  checkout.classList.remove("active");
+  toggleCart();
+}
+
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+</script>
+
+</body>
+</html>
